@@ -1,15 +1,17 @@
-import {Alert, ImageBackground, StyleSheet, TextInput, View} from "react-native";
-import React, {useState} from "react";
+import {Alert, TextInput, View} from "react-native";
+import {useDispatch} from 'react-redux';
+import {useState} from "react";
 import PrimaryButton from "../components/PrimaryButton";
 import styles from "./styles/screens_styles";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import {useNavigation} from "@react-navigation/native";
-import {useNumber} from "../contexts/numberContext";
+import {setChosenNumber} from "../features/number/numberSlice";
 
 const StartGameScreen = (props) => {
-    const { dispatch } = useNumber();
+
     const navigation = useNavigation();
     const [enteredValue, setEnteredValue] = useState('');
+    const dispatch = useDispatch();
     const valueChangeHandler = (value) => {
         setEnteredValue(value);
     }
@@ -23,7 +25,7 @@ const StartGameScreen = (props) => {
             return;
         }
         console.log(enteredValue);
-        dispatch({ type: 'SET_CHOSEN_NUMBER', payload: chosenNumber });
+        dispatch(setChosenNumber(chosenNumber));
         navigation.navigate('Game');
     }
 
