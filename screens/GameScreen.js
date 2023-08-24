@@ -3,15 +3,18 @@ import {StyleSheet} from 'react-native';
 import React from "react";
 import {useNumber} from "../contexts/numberContext";
 import {useSelector} from "react-redux";
+import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const GameScreen = () => {
 
     const {chosenNumber} = useSelector((state) => state.number);
 
     return (
-        <View style={styles.gameScreen}>
-            <Text style={styles.gameScreenText}>{chosenNumber}</Text>
-        </View>
+        <BackgroundWrapper>
+            <View style={styles.gameScreen}>
+                <Text style={styles.gameScreenText}>{chosenNumber}</Text>
+            </View>
+        </BackgroundWrapper>
     );
 }
 
