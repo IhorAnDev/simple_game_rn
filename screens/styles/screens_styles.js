@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
+import Colors from "../../constants/colors";
 
 const styles = StyleSheet.create({
     inputContainer: {
         padding: 16,
         marginTop: 100,
-        backgroundColor: '#420323',
+        backgroundColor: Colors.primary800,
         borderRadius: 8,
         marginHorizontal: 24,
         elevation: 6,
@@ -24,9 +25,9 @@ const styles = StyleSheet.create({
         height: 50,
         width: 50,
         fontSize: 32,
-        borderBottomColor: '#ddb52f',
+        borderBottomColor: Colors.accent500,
         borderBottomWidth: 2,
-        color: '#ddb52f',
+        color: Colors.accent500,
         marginVertical: 8,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     buttonInnerContainer: {
-        backgroundColor: '#72063c',
+        backgroundColor: Colors.primary500,
         paddingVertical: 8,
         paddingHorizontal: 16,
         elevation: 2,

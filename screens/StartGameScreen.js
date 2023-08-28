@@ -1,7 +1,7 @@
 import {Alert, TextInput, View} from "react-native";
 import {useDispatch} from 'react-redux';
 import {useState} from "react";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "../components/ui/PrimaryButton";
 import styles from "./styles/screens_styles";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import {useNavigation} from "@react-navigation/native";
