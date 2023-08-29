@@ -21,19 +21,23 @@ function generateRandomBetween(min, max, exclude) {
 
 let minBoundary = 1;
 let maxBoundary = 100;
-
 const GameScreen = () => {
+
+
 
     const {chosenNumber} = useSelector((state) => state.number);
     const initialGuess = generateRandomBetween(minBoundary, maxBoundary, chosenNumber);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
     const navigation = useNavigation();
 
+
     useEffect(() => {
         if (currentGuess === chosenNumber) {
             Alert.alert('You won!',
                 'Restart the game to try again',
-                [{text: 'Okay', style: 'destructive', onPress: () => navigation.replace('StartGame')}]);
+                [{text: 'Okay', style: 'destructive', onPress: () => navigation.navigate('StartGame')}])
+            minBoundary = 1;
+            maxBoundary = 100;
         }
     }, [currentGuess]);
 
@@ -55,6 +59,7 @@ const GameScreen = () => {
         } else {
             minBoundary = currentGuess + 1;
         }
+        console.log(maxBoundary, minBoundary);
         const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
         setCurrentGuess(newRndNumber)
     }
@@ -67,8 +72,8 @@ const GameScreen = () => {
                 <View>
                     <Text>Higher or lower</Text>
                     <View style={styles.buttonContainer}>
-                        <PrimaryButton onPress={() => nextGuessHandler('greater')}>+</PrimaryButton>
-                        <PrimaryButton onPress={() => nextGuessHandler('lower')}>-</PrimaryButton>
+                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>-</PrimaryButton>
+                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>+</PrimaryButton>
                     </View>
                 </View>
                 {/*<View>LOG ROUNDS</View>*/}

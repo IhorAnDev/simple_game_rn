@@ -24,7 +24,6 @@ const StartGameScreen = (props) => {
                 [{text: 'Okay', style: 'destructive', onPress: resetInputHandler}]);
             return;
         }
-        console.log(enteredValue);
         dispatch(setChosenNumber(chosenNumber));
         navigation.navigate('Game');
     }
