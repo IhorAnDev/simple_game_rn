@@ -2,6 +2,7 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import StartGameScreen from "../../screens/StartGameScreen";
 import GameScreen from "../../screens/GameScreen";
+import GameOverScreen from "../../screens/GameOverScreen";
 
 const Stack = createStackNavigator();
 
@@ -9,14 +10,19 @@ const AppNavigator = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="StartGame"
+                name="StartGameScreen"
                 component={StartGameScreen}
-                options={{ headerShown: false }}
+                options={{headerShown: false}}
             />
             <Stack.Screen
-                name="Game"
+                name="GameScreen"
                 component={GameScreen}
-                options={{ headerShown: false }}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name="GameOverScreen"
+                component={GameOverScreen}
+                options={{headerShown: false}}
             />
         </Stack.Navigator>
     );

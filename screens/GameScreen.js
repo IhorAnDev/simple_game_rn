@@ -8,7 +8,7 @@ import Title from "../components/ui/Title";
 import Colors from "../constants/colors";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
-import {useNavigation} from "@react-navigation/native";
+import {useNavigation, useRoute} from "@react-navigation/native";
 
 function generateRandomBetween(min, max, exclude) {
     const rndNum = Math.floor(Math.random() * (max - min + 1) + min);
@@ -23,23 +23,23 @@ let minBoundary = 1;
 let maxBoundary = 100;
 const GameScreen = () => {
 
-
-
     const {chosenNumber} = useSelector((state) => state.number);
-    const initialGuess = generateRandomBetween(minBoundary, maxBoundary, chosenNumber);
+    const initialGuess = generateRandomBetween(1, 100, chosenNumber);
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
     const navigation = useNavigation();
 
+    const route = useRoute();
+    const {resetInputHandler} = route.params;
 
     useEffect(() => {
         if (currentGuess === chosenNumber) {
-            Alert.alert('You won!',
-                'Restart the game to try again',
-                [{text: 'Okay', style: 'destructive', onPress: () => navigation.navigate('StartGame')}])
-            minBoundary = 1;
-            maxBoundary = 100;
+            // Alert.alert('You won!',
+            //     'Restart the game to try again',
+            //     [{text: 'Okay', style: 'destructive', onPress: () => navigation.navigate('StartGame')}])
+            resetInputHandler();
+            navigation.navigate('GameOverScreen');
         }
-    }, [currentGuess]);
+    }, [currentGuess, chosenNumber]);
 
     function nextGuessHandler(direction) {
         if (

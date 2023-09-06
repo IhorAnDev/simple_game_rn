@@ -11,6 +11,7 @@ const StartGameScreen = (props) => {
 
     const navigation = useNavigation();
     const [enteredValue, setEnteredValue] = useState('');
+
     const dispatch = useDispatch();
     const valueChangeHandler = (value) => {
         setEnteredValue(value);
@@ -25,7 +26,7 @@ const StartGameScreen = (props) => {
             return;
         }
         dispatch(setChosenNumber(chosenNumber));
-        navigation.navigate('Game');
+        navigation.navigate('GameScreen', {resetInputHandler});
     }
 
 
