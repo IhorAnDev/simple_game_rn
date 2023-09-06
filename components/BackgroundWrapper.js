@@ -1,11 +1,12 @@
 import React from 'react';
 import {LinearGradient} from 'expo-linear-gradient';
-import {ImageBackground} from 'react-native';
+import {ImageBackground, SafeAreaView} from 'react-native';
+import Colors from "../constants/colors";
 
 const BackgroundWrapper = ({children}) => {
     return (
         <LinearGradient
-            colors={['#961254', '#ddb52f']}
+            colors={[Colors.primary700, Colors.accent500]}
             style={{flex: 1}}
         >
             <ImageBackground
@@ -14,7 +15,9 @@ const BackgroundWrapper = ({children}) => {
                 style={{flex: 1}}
                 imageStyle={{opacity: 0.5}}
             >
-                {children}
+                <SafeAreaView style={{flex: 1}}>
+                    {children}
+                </SafeAreaView>
             </ImageBackground>
         </LinearGradient>
     );

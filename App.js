@@ -5,6 +5,7 @@ import {NumberProvider} from "./contexts/numberContext";
 import {Provider} from "react-redux";
 import store from "./store/store";
 import React from "react";
+import BackgroundWrapper from "./components/BackgroundWrapper";
 
 export default function App() {
     return (
@@ -12,7 +13,7 @@ export default function App() {
             <NumberProvider>
                 <StatusBar barStyle="dark-content"/>
                 <NavigationContainer>
-                    <AppNavigator/>
+                        <AppNavigator/>
                 </NavigationContainer>
             </NumberProvider>
         </Provider>

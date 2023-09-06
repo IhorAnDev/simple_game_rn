@@ -1,7 +1,7 @@
 import {Alert, TextInput, View} from "react-native";
 import {useDispatch} from 'react-redux';
 import {useState} from "react";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "../components/ui/PrimaryButton";
 import styles from "./styles/screens_styles";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import {useNavigation} from "@react-navigation/native";
@@ -11,6 +11,7 @@ const StartGameScreen = (props) => {
 
     const navigation = useNavigation();
     const [enteredValue, setEnteredValue] = useState('');
+
     const dispatch = useDispatch();
     const valueChangeHandler = (value) => {
         setEnteredValue(value);
@@ -24,9 +25,8 @@ const StartGameScreen = (props) => {
                 [{text: 'Okay', style: 'destructive', onPress: resetInputHandler}]);
             return;
         }
-        console.log(enteredValue);
         dispatch(setChosenNumber(chosenNumber));
-        navigation.navigate('Game');
+        navigation.navigate('GameScreen', {resetInputHandler});
     }
 
 
