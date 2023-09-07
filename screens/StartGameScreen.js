@@ -1,4 +1,4 @@
-import {Alert, TextInput, View} from "react-native";
+import {Alert, TextInput, View, StyleSheet, Text} from "react-native";
 import {useDispatch} from 'react-redux';
 import {useState} from "react";
 import PrimaryButton from "../components/ui/PrimaryButton";
@@ -6,6 +6,10 @@ import styles from "./styles/screens_styles";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import {useNavigation} from "@react-navigation/native";
 import {setChosenNumber} from "../features/number/numberSlice";
+import Title from "../components/ui/Title";
+import Card from "../components/ui/Сard";
+import InstructionText from "../components/ui/InstructionText";
+import ButtonContainer from "../components/ui/ButtonContainer";
 
 const StartGameScreen = (props) => {
 
@@ -26,7 +30,7 @@ const StartGameScreen = (props) => {
             return;
         }
         dispatch(setChosenNumber(chosenNumber));
-        navigation.navigate('GameScreen', {resetInputHandler});
+        navigation.navigate('GameScreen');
     }
 
 
@@ -36,26 +40,31 @@ const StartGameScreen = (props) => {
 
     return (
         <BackgroundWrapper>
-            <View style={styles.inputContainer}>
-                <TextInput style={styles.numberInput}
-                           maxLength={2}
-                           keyboardType="number-pad"
-                           autoCapitalize="none"
-                           autoCorrect={false}
-                           onChangeText={valueChangeHandler}
-                           value={enteredValue}
-                />
-                <View style={styles.wrapperButtonsContainer}>
-                    <View style={styles.buttonContainer}>
-                        <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+            <View style={styles.gameContainer}>
+                <Title style={styles.titleText}>Guess My Number</Title>
+                <Card>
+                    <InstructionText>Enter a number</InstructionText>
+                    <TextInput style={styles.numberInput}
+                               maxLength={2}
+                               keyboardType="number-pad"
+                               autoCapitalize="none"
+                               autoCorrect={false}
+                               onChangeText={valueChangeHandler}
+                               value={enteredValue}
+                    />
+                    <View style={styles.wrapperButtonsContainer}>
+                        <ButtonContainer>
+                            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+                        </ButtonContainer>
+                        <ButtonContainer>
+                            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+                        </ButtonContainer>
                     </View>
-                    <View style={styles.buttonContainer}>
-                        <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-                    </View>
-                </View>
+                </Card>
             </View>
         </BackgroundWrapper>
-    );
+    )
+        ;
 }
 
 

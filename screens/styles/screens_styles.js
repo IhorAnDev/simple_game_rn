@@ -2,9 +2,30 @@ import {StyleSheet} from 'react-native';
 import Colors from "../../constants/colors";
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        padding: 16,
+    gameContainer: {
+        flex: 1,
         marginTop: 100,
+        alignItems: 'center',
+    },
+    titleText: {
+        fontFamily: 'open-sans-bold',
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: Colors.white,
+        borderWidth: 2,
+        borderColor: Colors.white,
+        padding: 12,
+    },
+    guideText: {
+        fontFamily: 'open-sans',
+        fontSize: 24,
+        textAlign: 'center',
+        color: Colors.accent500,
+    },
+    card: {
+        padding: 16,
+        marginTop: 36,
         backgroundColor: Colors.primary800,
         borderRadius: 8,
         marginHorizontal: 24,

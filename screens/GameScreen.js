@@ -1,7 +1,6 @@
-import {View, Text, Alert} from "react-native";
+import {View, Alert} from "react-native";
 import {StyleSheet} from 'react-native';
 import React, {useEffect, useState} from "react";
-import {useNumber} from "../contexts/numberContext";
 import {useSelector} from "react-redux";
 import BackgroundWrapper from "../components/BackgroundWrapper";
 import Title from "../components/ui/Title";
@@ -9,6 +8,12 @@ import Colors from "../constants/colors";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import {useNavigation, useRoute} from "@react-navigation/native";
+import Card from "../components/ui/Сard";
+import InstructionText from "../components/ui/InstructionText";
+import ButtonContainerWrapper from "../components/ui/ButtonContainerWrapper";
+import ButtonContainer from "../components/ui/ButtonContainer";
+import {Ionicons} from '@expo/vector-icons';
+
 
 function generateRandomBetween(min, max, exclude) {
     const rndNum = Math.floor(Math.random() * (max - min + 1) + min);
@@ -28,15 +33,12 @@ const GameScreen = () => {
     const [currentGuess, setCurrentGuess] = useState(initialGuess);
     const navigation = useNavigation();
 
-    const route = useRoute();
-    const {resetInputHandler} = route.params;
 
     useEffect(() => {
         if (currentGuess === chosenNumber) {
             // Alert.alert('You won!',
             //     'Restart the game to try again',
             //     [{text: 'Okay', style: 'destructive', onPress: () => navigation.navigate('StartGame')}])
-            resetInputHandler();
             navigation.navigate('GameOverScreen');
         }
     }, [currentGuess, chosenNumber]);
@@ -59,7 +61,6 @@ const GameScreen = () => {
         } else {
             minBoundary = currentGuess + 1;
         }
-        console.log(maxBoundary, minBoundary);
         const newRndNumber = generateRandomBetween(minBoundary, maxBoundary, currentGuess);
         setCurrentGuess(newRndNumber)
     }
@@ -69,13 +70,21 @@ const GameScreen = () => {
             <View style={styles.gameScreen}>
                 <Title style={styles.titleText}>Opponent's guess</Title>
                 <NumberContainer>{currentGuess}</NumberContainer>
-                <View>
-                    <Text>Higher or lower</Text>
-                    <View style={styles.buttonContainer}>
-                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>-</PrimaryButton>
-                        <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>+</PrimaryButton>
-                    </View>
-                </View>
+                <Card>
+                    <InstructionText style={styles.guideText}> Higher or lower?</InstructionText>
+                    <ButtonContainerWrapper>
+                        <ButtonContainer>
+                            <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+                                <Ionicons name="md-remove" size={24} color={Colors.white}/>
+                            </PrimaryButton>
+                        </ButtonContainer>
+                        <ButtonContainer>
+                            <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+                                <Ionicons name="md-add" size={24} color={Colors.white}/>
+                            </PrimaryButton>
+                        </ButtonContainer>
+                    </ButtonContainerWrapper>
+                </Card>
                 {/*<View>LOG ROUNDS</View>*/}
             </View>
         </BackgroundWrapper>
@@ -89,6 +98,7 @@ const styles = StyleSheet.create({
 
     },
     titleText: {
+        fontFamily: 'open-sans-bold',
         fontSize: 24,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -99,6 +109,9 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flexDirection: 'row',
-    }
+    },
+    guideText: {
+        marginBottom: 22,
+    },
 });
 export default GameScreen;
